@@ -124,6 +124,7 @@ const config: Config = {
 
   // The root directory that Jest should scan for tests and modules within
   // rootDir: undefined,
+  rootDir: './src',
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: [
@@ -176,6 +177,9 @@ const config: Config = {
 
   // A map from regular expressions to paths to transformers
   // transform: undefined,
+  transform: {
+    '^.+\\.(t|j)sx?$': '@swc/jest',
+  },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
