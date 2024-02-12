@@ -37,7 +37,39 @@ npm install
 
 tail -f /dev/null
 ```
+
 4. Adds execution permission to '.docker/start.sh'
 ```bash
 chmod +x .docker/start.sh
+
 ```
+5. Create a Dev Containers Config file
+  THIS ITEM IS BLOCKED BECAUSE AN ISSUE WITH EXTENSION!!!
+
+6. Initializes NPM, scaffolds a typescript project, install jest
+```bash
+npm init -y
+npm i typescript -D
+npx tsc --init
+npm i jest @types/jest -D
+```
+7. Adds swc (built in Rust) for transpiling ts to js for jest
+```bash
+npm i @swc/core @swc/cli @swc/jest -D
+```
+
+8. Generate jest structure
+```bash
+npx jest --init
+```
+
+9. Updates jest.config.ts
+```bash
+// A map from regular expressions to paths to transformers
+  transform: {
+    '^.+\\.(t|j)sx?$': '@swc/jest',
+  },
+```
+10. `
+11.  
+ 
