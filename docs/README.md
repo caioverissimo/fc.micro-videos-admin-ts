@@ -5,7 +5,7 @@ src: [Configuração do Dockler](https://plataforma.fullcycle.com.br/courses/3b8
 ## Steps
 
 1. Initialize Dockerfile
-```yml
+```yaml
 FROM node:20.5.1-slim
 
 USER node
@@ -16,7 +16,7 @@ CMD ["tail", "-f", "/dev/null"]
 ```
 
 2. Initialize docker-compose.yml
-```yml
+```yaml
 version: '3'
 
 services:
@@ -122,3 +122,13 @@ npm i ts-node -D
 ```
 - After any Dev Container files modifications, remember to rebuild the Dev Container: through Command Palette (```Cmd + Shift + P```), select:
   - "Dev Container: Rebuild Container"
+- For the DevContainer VS Code extensions, we can set in VS Code the "Dev > Containers: Default Extensions (Applies to all profiles)". But we can also include all extension's id's into the following ".devcontainer/devcontainer.json" with the following properties (replace ${VS_CODE_EXTENSION_ID} by the actual extension id):
+```json
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"${VS_CODE_EXTENSION_ID}", // extension ids goes here
+			]
+		}
+	}
+```
