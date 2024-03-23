@@ -13,7 +13,8 @@ export type CategoryCreateCommand = {
 }
 
 export class Category {
-  category_id: string;
+  // category_id: string; // here was a type error, for toJSON method
+  category_id: string | undefined;
   name: string;
   description: string | null;
   is_active: boolean;

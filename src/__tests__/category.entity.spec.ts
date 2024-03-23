@@ -1,7 +1,7 @@
-import { Category } from "../domain/category.entity"
+import { Category } from "../category/domain/category.entity"
 
 describe('Category | Unit Tests', () => {
-  describe ('constructor', () => {
+  describe('constructor', () => {
     it('should create a category with default values', () => {
       const category = new Category({
         name: 'Movie'
@@ -19,7 +19,7 @@ describe('Category | Unit Tests', () => {
 
       const category = new Category({
         name: 'Movie',
-        description: 'Movie description', 
+        description: 'Movie description',
         is_active: false,
         created_at
       });
@@ -97,18 +97,17 @@ describe('Category | Unit Tests', () => {
 
       const category = new Category({
         name: 'Movie',
-        description: 'Movie description', 
+        description: 'Movie description',
         is_active: false,
         created_at
       });
 
       expect(category).toMatchObject({
         name: 'Movie',
-        description: 'Movie description', 
+        description: 'Movie description',
         is_active: false,
         created_at
       })
     });
   });
-  
 });
