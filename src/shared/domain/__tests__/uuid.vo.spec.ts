@@ -1,4 +1,4 @@
-import { InvalidUuidError, Uuid } from "../uuid.vo";
+import { InvalidUuidError, Uuid } from "../value-objects/uuid.vo";
 import { validate as uuidValidate } from "uuid";
 
 describe('Uuid | Unit Tests', () => {
