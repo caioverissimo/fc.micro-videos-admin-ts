@@ -1,4 +1,6 @@
+import { Entity } from "../../shared/domain/entity";
 import { EntityValidationError } from "../../shared/domain/validators/validation.error";
+import { ValueObject } from "../../shared/domain/value-object";
 import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
 import { CategoryValidatorFactory } from "./category.validator";
 
@@ -18,7 +20,7 @@ export type CategoryCreateCommand = {
   is_active?: boolean;
 }
 
-export class Category {
+export class Category extends Entity {
   // category_id: string; // here was a type error, for toJSON method
   category_id: Uuid;
   name: string;
@@ -27,6 +29,7 @@ export class Category {
   created_at: Date;
 
   constructor(props: CategoryConstructorProps) {
+    super();
     // to initialize uuid in case of not been received
     // instead 'new Uuid()', we can implement an static method like 'create' inside Uuid
     this.category_id = props.category_id ?? new Uuid();
@@ -34,6 +37,11 @@ export class Category {
     this.description = props.description ?? null;
     this.is_active = props.is_active ?? true;
     this.created_at = props.created_at ?? new Date();
+  }
+
+  get entity_id(): ValueObject {
+    // throw new Error("Method not implemented.");
+    return this.category_id;
   }
 
   // factory method
