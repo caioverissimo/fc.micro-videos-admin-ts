@@ -2,6 +2,12 @@ import { Uuid } from "../../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../category.entity"
 
 describe('Category | Unit Tests', () => {
+  let validateSpy: any;
+
+  beforeEach(() => {
+    validateSpy = jest.spyOn(Category, "validate");
+  })
+
   describe('constructor', () => {
     it('should create a category with default values', () => {
       const category = new Category({
@@ -44,7 +50,38 @@ describe('Category | Unit Tests', () => {
       expect(category.description).toBeNull();
       expect(category.is_active).toBeTruthy();
       expect(category.created_at).toBeInstanceOf(Date);
+      expect(validateSpy).toHaveBeenCalledTimes(1);
     });
+
+    it('should create a category with description', () => {
+      const category = Category.create({
+        name: 'Movie',
+        description: "some description"
+      });
+
+      expect(category.category_id).toBeInstanceOf(Uuid);
+      expect(category.name).toBe('Movie');
+      expect(category.description).toBe("some description");
+      expect(category.is_active).toBeTruthy();
+      expect(category.created_at).toBeInstanceOf(Date);
+      expect(validateSpy).toHaveBeenCalledTimes(1);
+      expect(validateSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should create a category with is_active', () => {
+      const category = Category.create({
+        name: 'Movie',
+        is_active: false,
+      });
+
+      expect(category.category_id).toBeInstanceOf(Uuid);
+      expect(category.name).toBe('Movie');
+      expect(category.description).toBeNull();
+      expect(category.is_active).toBe(false);
+      expect(category.created_at).toBeInstanceOf(Date);
+      expect(validateSpy).toHaveBeenCalledTimes(1);
+    });
+
   });
 
   describe('category_id field', () => {
@@ -70,23 +107,31 @@ describe('Category | Unit Tests', () => {
 
   describe('changeName()', () => {
     it('should change name', () => {
-      const category = new Category({
+      // const category = new Category({
+      //   name: 'Movie',
+      // });
+      const category = Category.create({
         name: 'Movie',
       });
 
       category.changeName('other name');
       expect(category.name).toBe('other name');
+      expect(validateSpy).toHaveBeenCalledTimes(2);
     });
   });
 
   describe('changeDescription()', () => {
     it('should change description', () => {
-      const category = new Category({
+      // const category = new Category({
+      //   name: 'Movie',
+      // });
+      const category = Category.create({
         name: 'Movie',
       });
 
       category.changeDescription('movie new description');
       expect(category.description).toBe('movie new description');
+      expect(validateSpy).toHaveBeenCalledTimes(2);
     });
   });
 
