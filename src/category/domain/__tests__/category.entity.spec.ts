@@ -184,109 +184,109 @@ describe('Category Validator | Unit Tests', () => {
 
   // TODO: for this to work, need to fix on 'jest.config.ts'(at the project root)
   describe('create command', () => {
-    // it('should throw error when name is empty string', () => {
+    it('should throw error when name is empty string', () => {
 
-    //   // setupFilesAfterEnv: ["./shared/infra/testing/expect-helpers.ts"],
+      // setupFilesAfterEnv: ["./shared/infra/testing/expect-helpers.ts"],
 
-    //   // expect(() => Category.create({ name: null }))
-    //   //   .containsErrorMessages({
-    //   //     name: [
-    //   //       "name should not be empty",
-    //   //       "name must be a string",
-    //   //       "name must be shorter than or equal to 255 characters"
-    //   //     ],
-    //   //   })
+      expect(() => Category.create({ name: null }))
+        .containsErrorMessages({
+          name: [
+            "name should not be empty",
+            "name must be a string",
+            "name must be shorter than or equal to 255 characters"
+          ],
+        })
 
-    //   // expect(() => Category.create({ name: '' })).containsErrorMessages({
-    //   //   name: ['name should not be empty'],
-    //   // })
+      expect(() => Category.create({ name: '' })).containsErrorMessages({
+        name: ['name should not be empty'],
+      })
 
-    //   // expect(() => Category.create({ name: 5 as any })).containsErrorMessages({
-    //   //   name: [
-    //   //     'name must be a string',
-    //   //     'name must be shorter or equal to 255 characters',
-    //   //   ],
-    //   // });
+      expect(() => Category.create({ name: 5 as any })).containsErrorMessages({
+        name: [
+          'name must be a string',
+          'name must be shorter or equal to 255 characters',
+        ],
+      });
 
-    //   // expect(() =>
-    //   //   Category.create({ name: 't'.repeat(256) }),
-    //   // ).containsErrorMessages({
-    //   //   name: ['name must be shorter than or equal to 255 characters'],
-    //   // });
+      expect(() =>
+        Category.create({ name: 't'.repeat(256) }),
+      ).containsErrorMessages({
+        name: ['name must be shorter than or equal to 255 characters'],
+      });
 
-    //   // expect(() => {
-    //   //   Category.create({
-    //   //     name: "",
-    //   //   });
-    //   // }).toThrow(
-    //   //   new EntityValidationError({
-    //   //     name: ["name is required"],
-    //   //   })
-    //   // );
+      expect(() => {
+        Category.create({
+          name: "",
+        });
+      }).toThrow(
+        new EntityValidationError({
+          name: ["name is required"],
+        })
+      );
 
-    //   // try {
-    //   //   Category.create({
-    //   //     name: null
-    //   //   });
-    //   // } catch (err) {
-    //   //   console.error(err);
-    //   // }
-    // })
+      try {
+        Category.create({
+          name: null
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    })
 
-    // it('should a invalid category using description property', () => {
-    //   expect(() =>
-    //     Category.create({ description: 5 } as any)
-    //   ).containsErrorMessages({
-    //     description: ['description must be a string'],
-    //   });
-    // });
+    it('should a invalid category using description property', () => {
+      expect(() =>
+        Category.create({ description: 5 } as any)
+      ).containsErrorMessages({
+        description: ['description must be a string'],
+      });
+    });
 
-    // it('should a invalid category using is_active property', () => {
-    //   expect(() =>
-    //     Category.create({ is_active: 5 } as any)
-    //   ).containsErrorMessages({
-    //     description: ['is_active must be a boolean value'],
-    //   });
-    // });
+    it('should a invalid category using is_active property', () => {
+      expect(() =>
+        Category.create({ is_active: 5 } as any)
+      ).containsErrorMessages({
+        description: ['is_active must be a boolean value'],
+      });
+    });
   });
 
-  // describe('changeName method', () => {
-  //   it('should a invalid category using name property', () => {
-  //     const category = Category.create({ name: 'Movie' });
+  describe('changeName method', () => {
+    it('should a invalid category using name property', () => {
+      const category = Category.create({ name: 'Movie' });
 
-  //     expect(() => category.changeName(null)).containsErrorMessages({
-  //       name: [
-  //         'name should not be empty',
-  //         'name must be a string',
-  //         'name must be shorter than or equal to 255 characters'
-  //       ]
-  //     });
+      expect(() => category.changeName(null)).containsErrorMessages({
+        name: [
+          'name should not be empty',
+          'name must be a string',
+          'name must be shorter than or equal to 255 characters'
+        ]
+      });
 
-  //     expect(() => category.changeName('')).containsErrorMessages({
-  //       name: ['name should not be empty']
-  //     });
+      expect(() => category.changeName('')).containsErrorMessages({
+        name: ['name should not be empty']
+      });
 
-  //     expect(() => category.changeName(5 as any)).containsErrorMessages({
-  //       name: [
-  //         'name must be a string',
-  //         'name must be shorter than or equal to 255 characters'
-  //       ]
-  //     });
+      expect(() => category.changeName(5 as any)).containsErrorMessages({
+        name: [
+          'name must be a string',
+          'name must be shorter than or equal to 255 characters'
+        ]
+      });
 
-  //     expect(() => category.changeName('t'.repeat(256))).containsErrorMessages({
-  //       name: ['name must be shorter than or equal to 255 characters']
-  //     });
-  //   });
-  // });
+      expect(() => category.changeName('t'.repeat(256))).containsErrorMessages({
+        name: ['name must be shorter than or equal to 255 characters']
+      });
+    });
+  });
 
-  // describe('changeDescription method', () => {
-  //   it('should a invalid category using description property', () => {
-  //     const category = Category.create({ name: "Movie" });
+  describe('changeDescription method', () => {
+    it('should a invalid category using description property', () => {
+      const category = Category.create({ name: "Movie" });
 
-  //     expect(() => category.changeDescription(5 as any)).containsErrorMessages({
-  //       description: ['description must be a string']
-  //     });
-  //   });
-  // });
+      expect(() => category.changeDescription(5 as any)).containsErrorMessages({
+        description: ['description must be a string']
+      });
+    });
+  });
   // endof TODO: for this to work, need to fix on 'jest.config.ts'(at the project root)
 });
