@@ -49,7 +49,8 @@ export abstract class InMemoryRepository<E extends Entity, EntityId extends Valu
   };
 
   async findAll(): Promise<E[]> {
-    throw new Error("Method not implemented");
+    // throw new Error("Method not implemented");
+    return this.items;
   };
 
   // protected _get(entity_id: EntityId) {
