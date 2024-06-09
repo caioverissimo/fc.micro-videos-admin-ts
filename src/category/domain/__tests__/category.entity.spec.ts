@@ -198,7 +198,7 @@ describe('Category Validator | Unit Tests', () => {
         name: ["name should not be empty"],
       });
 
-      // TODO: fix this test
+      // FIXME: fix this test
       // expect(() => Category.create({ name: 5 } as any)).containsErrorMessages({
       //   name: [
       //     "name must be a string",
