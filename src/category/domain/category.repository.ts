@@ -4,18 +4,7 @@ import { Category } from "./category.entity";
 import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
 
 
-export interface ICategoryRepository extends IRepository<Category, Uuid> {
-
-  // insert(valueObject) { // example
-  insert(entity: Category) {
-  // find() : Category[] {
-
-  // }
-
-  // count(): number // example
-}
-
-}
+export interface ICategoryRepositoryasd extends IRepository<Category, Uuid> { }
 
 
 
