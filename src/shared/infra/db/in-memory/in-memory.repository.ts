@@ -104,10 +104,15 @@ export abstract class InMemorySearchableRepository<
 
   protected abstract applyFilter(items: E[], filter: Filter | null): Promise<E[]>;
 
-  protected applyPagination(items: E[], page: SearchParams["page"], per_page: SearchParams["per_page"]) {
+  protected applyPagination(
+    items: E[],
+    page: SearchParams["page"],
+    per_page: SearchParams["per_page"]
+  ) {
     const start = (page - 1) * per_page; // 1 * 5 = 15
     const limit = start + per_page; // 15 + 15 = 30
-    return this.items.slice(start, limit);
+
+    return items.slice(start, limit);
   }
 
   protected applySort(
@@ -132,7 +137,7 @@ export abstract class InMemorySearchableRepository<
       }
 
       if (aValue > bValue) {
-        return sort_dir === 'asc' ? 1 : 1;
+        return sort_dir === 'asc' ? 1 : -1;
       }
 
       return 0;
