@@ -25,9 +25,9 @@ expect.extend({
         // }
         return isValid();
       } catch (err) {
-        if (received.name?.length === 2) {
-          console.log('err: ', err);
-        }
+        // if (received.name?.length === 2) {
+        //   console.log('err: ', err);
+        // }
         const error = err as EntityValidationError;
         // if (received.name?.length === 2) {
         //   console.log('error: ', error);
@@ -62,10 +62,10 @@ function assertContainsErrorsMessages(
 ) {
   const isMatch = expect.objectContaining(received).asymmetricMatch(expected);
 
-  if (received.name?.length === 2) {
-    console.log('@assertContainsErrorsMessages');
-    console.log('isMatch: ', isMatch);
-  }
+  // if (received.name?.length === 2) {
+  //   console.log('@assertContainsErrorsMessages');
+  //   console.log('isMatch: ', isMatch);
+  // }
 
   return isMatch
     ? isValid()
