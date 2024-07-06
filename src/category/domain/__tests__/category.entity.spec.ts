@@ -199,12 +199,13 @@ describe('Category Validator | Unit Tests', () => {
       });
 
       // FIXME: fix this test
-      // expect(() => Category.create({ name: 5 } as any)).containsErrorMessages({
-      //   name: [
-      //     "name must be a string",
-      //     "name must be shorter or equal to 255 characters",
-      //   ],
-      // });
+      // expect(() => Category.create({ name: 5 } as any))
+      //   .containsErrorMessages({
+      //     name: [
+      //       'name must be a string',
+      //       'name must be shorter or equal to 255 characters',
+      //     ],
+      //   });
 
       expect(() =>
         Category.create({ name: 't'.repeat(256) }),

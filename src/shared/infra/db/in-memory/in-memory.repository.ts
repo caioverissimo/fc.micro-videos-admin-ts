@@ -121,6 +121,7 @@ export abstract class InMemorySearchableRepository<
     sort_dir: SortDirection | null,
     custom_getter?: (sort: string, item: E) => any
   ) {
+
     if (!sort || !this.sortableFields.includes(sort)) {
       return items;
     }
@@ -129,7 +130,7 @@ export abstract class InMemorySearchableRepository<
       // TODO: fix this ts warnings
       //@ts-ignore
       const aValue = custom_getter ? custom_getter(sort, a) : a[sort];
-      //@ts-ignore
+      // @ts-ignore
       const bValue = custom_getter ? custom_getter(sort, b) : b[sort];
 
       if (aValue < bValue) {
