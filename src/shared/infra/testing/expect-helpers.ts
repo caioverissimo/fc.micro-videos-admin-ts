@@ -25,9 +25,9 @@ expect.extend({
         // }
         return isValid();
       } catch (err) {
-        if (received.name?.length === 2) {
-          console.log('err: ', err);
-        }
+        // if (received.name?.length === 2) {
+        //   console.log('err: ', err);
+        // }
         const error = err as EntityValidationError;
         // if (received.name?.length === 2) {
         //   console.log('error: ', error);
