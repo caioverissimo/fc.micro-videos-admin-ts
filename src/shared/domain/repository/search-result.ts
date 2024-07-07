@@ -10,8 +10,8 @@ type SearchResultConstructorProps<E extends Entity> = {
 }
 
 // export class SearchResult<A extends AggregateRoot = AggregateRoot> {
-export class SearchResult<A extends Entity = Entity> extends ValueObject {
-  readonly items: A[];
+export class SearchResult<E extends Entity = Entity> extends ValueObject {
+  readonly items: E[];
   readonly total: number;
   readonly current_page: number;
   readonly per_page: number;
