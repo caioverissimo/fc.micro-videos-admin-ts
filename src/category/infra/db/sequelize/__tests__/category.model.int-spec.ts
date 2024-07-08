@@ -2,21 +2,23 @@ import { DataType, Sequelize } from "sequelize-typescript";
 import { CategoryModel } from "../category.model";
 import { Category } from "../../../../domain/category.entity";
 import { Config } from "../../../../../shared/infra/config";
+import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
 
 describe('CategoryModel | Integration Tests', () => {
   let sequelize;
 
-  beforeEach(async () => {
-    console.log('Config.db(): ', Config.db());
-    sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
-      models: [CategoryModel],
-      logging: false // set 'true' to enable sequelize execution logs
-    });
+  // beforeEach(async () => {
+  //   // console.log('Config.db(): ', Config.db());
+  //   // sequelize = new Sequelize({
+  //   //   dialect: "sqlite",
+  //   //   storage: ":memory:",
+  //   //   models: [CategoryModel],
+  //   //   logging: false // set 'true' to enable sequelize execution logs
+  //   // });
 
-    await sequelize.sync({ force: true });
-  });
+  //   // await sequelize.sync({ force: true });
+  // });
+  setupSequelize({ models: [CategoryModel] });
 
   it('should create a category', async () => {
     const category = Category.fake().aCategory().build();

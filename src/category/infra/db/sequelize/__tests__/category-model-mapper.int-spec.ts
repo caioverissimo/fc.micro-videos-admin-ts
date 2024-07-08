@@ -5,20 +5,22 @@ import { CategoryModelMapper } from "../category-model-mapper";
 import { EntityValidationError } from "../../../../../shared/domain/validators/validation.error";
 import { Category } from "../../../../domain/category.entity";
 import { Uuid } from "../../../../../shared/domain/value-objects/uuid.vo";
+import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
 
 describe('CategorModelMapper | Integration Test', () => {
-  let sequelize;
+  // let sequelize;
 
-  beforeEach(async () => {
-    sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
-      models: [CategoryModel],
-      logging: false // set 'true' to enable sequelize execution logs
-    });
+  // beforeEach(async () => {
+  //   sequelize = new Sequelize({
+  //     dialect: "sqlite",
+  //     storage: ":memory:",
+  //     models: [CategoryModel],
+  //     logging: false // set 'true' to enable sequelize execution logs
+  //   });
 
-    await sequelize.sync({ force: true });
-  });
+  //   await sequelize.sync({ force: true });
+  // });
+  setupSequelize({ models: [CategoryModel] });
 
   it('should throw error when category is invalid', () => {
     // expect.assertions(2); // not need necessarily
