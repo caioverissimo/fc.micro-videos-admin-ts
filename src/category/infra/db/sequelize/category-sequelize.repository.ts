@@ -1,20 +1,14 @@
-import Op from "sequelize/types/operators";
 import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
 import { Uuid } from "../../../../shared/domain/value-objects/uuid.vo";
 import { Category } from "../../../domain/category.entity";
 import { CategoryModel } from "./category.model";
-import {
-  CategorySearchParams,
-  CategorySearchResult,
-  ICategoryRepository
-} from "../../../domain/category.repository";
+import { CategorySearchParams, CategorySearchResult, ICategoryRepository } from "../../../domain/category.repository";
+import { Op } from "sequelize";
 
 export class CategorySequelizeRepository implements ICategoryRepository {
   sortableFields: string[] = ["name", "created_at"];
 
-
   constructor(private categoryModel: typeof CategoryModel) {
-
   }
 
   async insert(entity: Category): Promise<void> {
@@ -24,7 +18,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
       description: entity.description,
       is_active: entity.is_active,
       created_at: entity.created_at,
-    })
+    });
   }
 
   async bulkInsert(entities: Category[]): Promise<void> {
@@ -72,12 +66,16 @@ export class CategorySequelizeRepository implements ICategoryRepository {
   async findById(entity_id: Uuid): Promise<Category | null> {
     const model = await this._get(entity_id.id);
 
+    if (!model) {
+      return null;
+    }
+
     return new Category({
-      category_id: new Uuid(model.category_id),
-      name: model.name,
-      description: model.description,
-      is_active: model.is_active,
-      created_at: model.created_at,
+      category_id: new Uuid(model?.category_id),
+      name: model?.name,
+      description: model?.description,
+      is_active: model?.is_active,
+      created_at: model?.created_at,
     });
   }
 

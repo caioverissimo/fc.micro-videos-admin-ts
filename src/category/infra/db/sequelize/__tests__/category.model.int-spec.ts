@@ -32,8 +32,8 @@ describe('CategoryModel | Integration Tests', () => {
     const attributesMap = CategoryModel.getAttributes();
     const attributes = Object.keys(CategoryModel.getAttributes());
 
-    console.log('attributes: ', attributes);
-    console.log('attributesMap: ', attributesMap)
+    // console.log('attributes: ', attributes);
+    // console.log('attributesMap: ', attributesMap)
 
     expect(attributes).toStrictEqual([
       "category_id",
