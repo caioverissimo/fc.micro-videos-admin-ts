@@ -20,8 +20,8 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     //   is_active: entity.is_active,
     //   created_at: entity.created_at,
     // });
-    const model = CategoryModelMapper.toModel(entity);
-    await this.categoryModel.create(model.toJSON());
+    const modelProps = CategoryModelMapper.toModel(entity);
+    await this.categoryModel.create(modelProps.toJSON());
   }
 
   async bulkInsert(entities: Category[]): Promise<void> {
@@ -34,8 +34,10 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     //     created_at: entity.created_at,
     //   }))
     //   );
-    const models = entities.map((entity) => CategoryModelMapper.toModel(entity));
-    await this.categoryModel.bulkCreate(models);
+    const modelsProps = entities.map((entity) =>
+      CategoryModelMapper.toModel(entity).toJSON(),
+    );
+    await this.categoryModel.bulkCreate(modelsProps);
   }
 
   async update(entity: Category): Promise<void> {
@@ -53,9 +55,9 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     //   is_active: entity.is_active,
     //   created_at: entity.created_at,
     // }, { where: { category_id: id } });
-    const modelToUpdate = CategoryModelMapper.toModel(entity);
+    const modelProps = CategoryModelMapper.toModel(entity);
     await this.categoryModel.update(
-      modelToUpdate.toJSON(),
+      modelProps.toJSON(),
       { where: { category_id: id } }
     );
   }
@@ -134,13 +136,14 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 
     return new CategorySearchResult({
       items: models.map((model) => {
-        return new Category({
-          category_id: new Uuid(model.category_id),
-          name: model.name,
-          description: model.description,
-          is_active: model.is_active,
-          created_at: model.created_at,
-        });
+        // return new Category({
+        //   category_id: new Uuid(model.category_id),
+        //   name: model.name,
+        //   description: model.description,
+        //   is_active: model.is_active,
+        //   created_at: model.created_at,
+        // });
+        return CategoryModelMapper.toEntity(model);
       }),
       current_page: props.page,
       per_page: props.per_page,
